@@ -4,9 +4,14 @@ import axios from 'axios';
 const API_URL = 'http://localhost:3000/products';
 
 // Função para listar produtos com filtros e ordenação
-export const fetchProducts = async (filters: { nome?: string; orderBy?: string }) => {
-    const response = await axios.get(API_URL, { params: filters });
-    return response.data.produtos;
+export const fetchProducts = async () => {
+    try {
+        const response = await axios.get(API_URL);
+        return response.data.produtos;
+    } catch (error) {
+        console.error('Erro ao buscar produtos:', error);
+        throw error;
+    }
 };
 
 // Função para adicionar um novo produto
